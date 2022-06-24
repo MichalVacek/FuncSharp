@@ -148,6 +148,47 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
+            }
+        }
+
+        /// <summary>
         /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place 
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
@@ -249,6 +290,57 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
             }
         }
 
@@ -361,6 +453,67 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
             }
         }
 
@@ -480,6 +633,77 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
             }
         }
 
@@ -606,6 +830,87 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
             }
         }
 
@@ -739,6 +1044,97 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
             }
         }
 
@@ -879,6 +1275,107 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
             }
         }
 
@@ -1026,6 +1523,117 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
             }
         }
 
@@ -1180,6 +1788,127 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
             }
         }
 
@@ -1341,6 +2070,137 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
             }
         }
 
@@ -1509,6 +2369,147 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
             }
         }
 
@@ -1684,6 +2685,157 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
             }
         }
 
@@ -1866,6 +3018,167 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
             }
         }
 
@@ -2055,6 +3368,177 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
             }
         }
 
@@ -2251,6 +3735,187 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, bool> e15, Func<T, TResult> f15,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (e15(value))
+            {
+                return f15(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Func<T, bool> e15, Action<T> f15,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (e15(value))
+            {
+                f15(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
             }
         }
 
@@ -2454,6 +4119,197 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, bool> e15, Func<T, TResult> f15,
+            Func<T, bool> e16, Func<T, TResult> f16,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (e15(value))
+            {
+                return f15(value);
+            }
+            if (e16(value))
+            {
+                return f16(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Func<T, bool> e15, Action<T> f15,
+            Func<T, bool> e16, Action<T> f16,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (e15(value))
+            {
+                f15(value);
+            }
+            else if (e16(value))
+            {
+                f16(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
             }
         }
 
@@ -2664,6 +4520,207 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, bool> e15, Func<T, TResult> f15,
+            Func<T, bool> e16, Func<T, TResult> f16,
+            Func<T, bool> e17, Func<T, TResult> f17,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (e15(value))
+            {
+                return f15(value);
+            }
+            if (e16(value))
+            {
+                return f16(value);
+            }
+            if (e17(value))
+            {
+                return f17(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Func<T, bool> e15, Action<T> f15,
+            Func<T, bool> e16, Action<T> f16,
+            Func<T, bool> e17, Action<T> f17,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (e15(value))
+            {
+                f15(value);
+            }
+            else if (e16(value))
+            {
+                f16(value);
+            }
+            else if (e17(value))
+            {
+                f17(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
             }
         }
 
@@ -2881,6 +4938,217 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, bool> e15, Func<T, TResult> f15,
+            Func<T, bool> e16, Func<T, TResult> f16,
+            Func<T, bool> e17, Func<T, TResult> f17,
+            Func<T, bool> e18, Func<T, TResult> f18,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (e15(value))
+            {
+                return f15(value);
+            }
+            if (e16(value))
+            {
+                return f16(value);
+            }
+            if (e17(value))
+            {
+                return f17(value);
+            }
+            if (e18(value))
+            {
+                return f18(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Func<T, bool> e15, Action<T> f15,
+            Func<T, bool> e16, Action<T> f16,
+            Func<T, bool> e17, Action<T> f17,
+            Func<T, bool> e18, Action<T> f18,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (e15(value))
+            {
+                f15(value);
+            }
+            else if (e16(value))
+            {
+                f16(value);
+            }
+            else if (e17(value))
+            {
+                f17(value);
+            }
+            else if (e18(value))
+            {
+                f18(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
             }
         }
 
@@ -3105,6 +5373,227 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+            }
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+            Func<T, bool> e1, Func<T, TResult> f1,
+            Func<T, bool> e2, Func<T, TResult> f2,
+            Func<T, bool> e3, Func<T, TResult> f3,
+            Func<T, bool> e4, Func<T, TResult> f4,
+            Func<T, bool> e5, Func<T, TResult> f5,
+            Func<T, bool> e6, Func<T, TResult> f6,
+            Func<T, bool> e7, Func<T, TResult> f7,
+            Func<T, bool> e8, Func<T, TResult> f8,
+            Func<T, bool> e9, Func<T, TResult> f9,
+            Func<T, bool> e10, Func<T, TResult> f10,
+            Func<T, bool> e11, Func<T, TResult> f11,
+            Func<T, bool> e12, Func<T, TResult> f12,
+            Func<T, bool> e13, Func<T, TResult> f13,
+            Func<T, bool> e14, Func<T, TResult> f14,
+            Func<T, bool> e15, Func<T, TResult> f15,
+            Func<T, bool> e16, Func<T, TResult> f16,
+            Func<T, bool> e17, Func<T, TResult> f17,
+            Func<T, bool> e18, Func<T, TResult> f18,
+            Func<T, bool> e19, Func<T, TResult> f19,
+            Func<T, TResult> otherwise = null)
+        {
+            if (e1(value))
+            {
+                return f1(value);
+            }
+            if (e2(value))
+            {
+                return f2(value);
+            }
+            if (e3(value))
+            {
+                return f3(value);
+            }
+            if (e4(value))
+            {
+                return f4(value);
+            }
+            if (e5(value))
+            {
+                return f5(value);
+            }
+            if (e6(value))
+            {
+                return f6(value);
+            }
+            if (e7(value))
+            {
+                return f7(value);
+            }
+            if (e8(value))
+            {
+                return f8(value);
+            }
+            if (e9(value))
+            {
+                return f9(value);
+            }
+            if (e10(value))
+            {
+                return f10(value);
+            }
+            if (e11(value))
+            {
+                return f11(value);
+            }
+            if (e12(value))
+            {
+                return f12(value);
+            }
+            if (e13(value))
+            {
+                return f13(value);
+            }
+            if (e14(value))
+            {
+                return f14(value);
+            }
+            if (e15(value))
+            {
+                return f15(value);
+            }
+            if (e16(value))
+            {
+                return f16(value);
+            }
+            if (e17(value))
+            {
+                return f17(value);
+            }
+            if (e18(value))
+            {
+                return f18(value);
+            }
+            if (e19(value))
+            {
+                return f19(value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+            Func<T, bool> e1, Action<T> f1,
+            Func<T, bool> e2, Action<T> f2,
+            Func<T, bool> e3, Action<T> f3,
+            Func<T, bool> e4, Action<T> f4,
+            Func<T, bool> e5, Action<T> f5,
+            Func<T, bool> e6, Action<T> f6,
+            Func<T, bool> e7, Action<T> f7,
+            Func<T, bool> e8, Action<T> f8,
+            Func<T, bool> e9, Action<T> f9,
+            Func<T, bool> e10, Action<T> f10,
+            Func<T, bool> e11, Action<T> f11,
+            Func<T, bool> e12, Action<T> f12,
+            Func<T, bool> e13, Action<T> f13,
+            Func<T, bool> e14, Action<T> f14,
+            Func<T, bool> e15, Action<T> f15,
+            Func<T, bool> e16, Action<T> f16,
+            Func<T, bool> e17, Action<T> f17,
+            Func<T, bool> e18, Action<T> f18,
+            Func<T, bool> e19, Action<T> f19,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+            else if (e2(value))
+            {
+                f2(value);
+            }
+            else if (e3(value))
+            {
+                f3(value);
+            }
+            else if (e4(value))
+            {
+                f4(value);
+            }
+            else if (e5(value))
+            {
+                f5(value);
+            }
+            else if (e6(value))
+            {
+                f6(value);
+            }
+            else if (e7(value))
+            {
+                f7(value);
+            }
+            else if (e8(value))
+            {
+                f8(value);
+            }
+            else if (e9(value))
+            {
+                f9(value);
+            }
+            else if (e10(value))
+            {
+                f10(value);
+            }
+            else if (e11(value))
+            {
+                f11(value);
+            }
+            else if (e12(value))
+            {
+                f12(value);
+            }
+            else if (e13(value))
+            {
+                f13(value);
+            }
+            else if (e14(value))
+            {
+                f14(value);
+            }
+            else if (e15(value))
+            {
+                f15(value);
+            }
+            else if (e16(value))
+            {
+                f16(value);
+            }
+            else if (e17(value))
+            {
+                f17(value);
+            }
+            else if (e18(value))
+            {
+                f18(value);
+            }
+            else if (e19(value))
+            {
+                f19(value);
+            }
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
             }
         }
 
