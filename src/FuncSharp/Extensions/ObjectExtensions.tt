@@ -159,6 +159,55 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static TResult Match<T, TResult>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "Func<T, bool> e" + j + ", Func<T, TResult> f" + j, separator: ",") #>,
+            Func<T, TResult> otherwise = null)
+        {
+<#     for (var j = 1; j <= i; j++) { #>
+            if (e<#= j #>(value))
+            {
+                return f<#= j #>(value);
+            }
+<#     } #>
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+        }
+
+        /// <summary>
+        /// Matches the value with the specified function and executes the corresponding function.
+        /// </summary>
+        public static void Match<T>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "Func<T, bool> e" + j + ", Action<T> f" + j, separator: ",") #>,
+            Action<T> fallback = null)
+        {
+            if (e1(value))
+            {
+                f1(value);
+            }
+<#     for (var j = 2; j <= i; j++) { #>
+            else if (e<#= j #>(value))
+            {
+                f<#= j #>(value);
+            }
+<#     } #>
+            else if (fallback != null)
+            {
+                fallback(value);
+            }
+            else
+            {
+                throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+            }
+        }
+
 <#     } #>
 <# } #>
     }
