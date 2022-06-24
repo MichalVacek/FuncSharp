@@ -159,9 +159,9 @@ namespace FuncSharp
             {
                 return f1(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
@@ -172,15 +172,15 @@ namespace FuncSharp
         public static void Match<T>(
             this T value,
             Func<T, bool> e1, Action<T> f1,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
                 f1(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -310,9 +310,9 @@ namespace FuncSharp
             {
                 return f2(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
@@ -324,7 +324,7 @@ namespace FuncSharp
             this T value,
             Func<T, bool> e1, Action<T> f1,
             Func<T, bool> e2, Action<T> f2,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -334,9 +334,9 @@ namespace FuncSharp
             {
                 f2(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -478,9 +478,9 @@ namespace FuncSharp
             {
                 return f3(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
@@ -493,7 +493,7 @@ namespace FuncSharp
             Func<T, bool> e1, Action<T> f1,
             Func<T, bool> e2, Action<T> f2,
             Func<T, bool> e3, Action<T> f3,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -507,9 +507,9 @@ namespace FuncSharp
             {
                 f3(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -663,9 +663,9 @@ namespace FuncSharp
             {
                 return f4(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
@@ -679,7 +679,7 @@ namespace FuncSharp
             Func<T, bool> e2, Action<T> f2,
             Func<T, bool> e3, Action<T> f3,
             Func<T, bool> e4, Action<T> f4,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -697,9 +697,9 @@ namespace FuncSharp
             {
                 f4(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -865,9 +865,9 @@ namespace FuncSharp
             {
                 return f5(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
@@ -882,7 +882,7 @@ namespace FuncSharp
             Func<T, bool> e3, Action<T> f3,
             Func<T, bool> e4, Action<T> f4,
             Func<T, bool> e5, Action<T> f5,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -904,9 +904,9 @@ namespace FuncSharp
             {
                 f5(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -1084,9 +1084,9 @@ namespace FuncSharp
             {
                 return f6(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
@@ -1102,7 +1102,7 @@ namespace FuncSharp
             Func<T, bool> e4, Action<T> f4,
             Func<T, bool> e5, Action<T> f5,
             Func<T, bool> e6, Action<T> f6,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -1128,9 +1128,9 @@ namespace FuncSharp
             {
                 f6(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -1320,9 +1320,9 @@ namespace FuncSharp
             {
                 return f7(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
@@ -1339,7 +1339,7 @@ namespace FuncSharp
             Func<T, bool> e5, Action<T> f5,
             Func<T, bool> e6, Action<T> f6,
             Func<T, bool> e7, Action<T> f7,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -1369,9 +1369,9 @@ namespace FuncSharp
             {
                 f7(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -1573,9 +1573,9 @@ namespace FuncSharp
             {
                 return f8(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
@@ -1593,7 +1593,7 @@ namespace FuncSharp
             Func<T, bool> e6, Action<T> f6,
             Func<T, bool> e7, Action<T> f7,
             Func<T, bool> e8, Action<T> f8,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -1627,9 +1627,9 @@ namespace FuncSharp
             {
                 f8(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -1843,9 +1843,9 @@ namespace FuncSharp
             {
                 return f9(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
@@ -1864,7 +1864,7 @@ namespace FuncSharp
             Func<T, bool> e7, Action<T> f7,
             Func<T, bool> e8, Action<T> f8,
             Func<T, bool> e9, Action<T> f9,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -1902,9 +1902,9 @@ namespace FuncSharp
             {
                 f9(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -2130,9 +2130,9 @@ namespace FuncSharp
             {
                 return f10(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
@@ -2152,7 +2152,7 @@ namespace FuncSharp
             Func<T, bool> e8, Action<T> f8,
             Func<T, bool> e9, Action<T> f9,
             Func<T, bool> e10, Action<T> f10,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -2194,9 +2194,9 @@ namespace FuncSharp
             {
                 f10(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -2434,9 +2434,9 @@ namespace FuncSharp
             {
                 return f11(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
@@ -2457,7 +2457,7 @@ namespace FuncSharp
             Func<T, bool> e9, Action<T> f9,
             Func<T, bool> e10, Action<T> f10,
             Func<T, bool> e11, Action<T> f11,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -2503,9 +2503,9 @@ namespace FuncSharp
             {
                 f11(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -2755,9 +2755,9 @@ namespace FuncSharp
             {
                 return f12(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
@@ -2779,7 +2779,7 @@ namespace FuncSharp
             Func<T, bool> e10, Action<T> f10,
             Func<T, bool> e11, Action<T> f11,
             Func<T, bool> e12, Action<T> f12,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -2829,9 +2829,9 @@ namespace FuncSharp
             {
                 f12(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -3093,9 +3093,9 @@ namespace FuncSharp
             {
                 return f13(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
@@ -3118,7 +3118,7 @@ namespace FuncSharp
             Func<T, bool> e11, Action<T> f11,
             Func<T, bool> e12, Action<T> f12,
             Func<T, bool> e13, Action<T> f13,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -3172,9 +3172,9 @@ namespace FuncSharp
             {
                 f13(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -3448,9 +3448,9 @@ namespace FuncSharp
             {
                 return f14(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
@@ -3474,7 +3474,7 @@ namespace FuncSharp
             Func<T, bool> e12, Action<T> f12,
             Func<T, bool> e13, Action<T> f13,
             Func<T, bool> e14, Action<T> f14,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -3532,9 +3532,9 @@ namespace FuncSharp
             {
                 f14(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -3820,9 +3820,9 @@ namespace FuncSharp
             {
                 return f15(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
@@ -3847,7 +3847,7 @@ namespace FuncSharp
             Func<T, bool> e13, Action<T> f13,
             Func<T, bool> e14, Action<T> f14,
             Func<T, bool> e15, Action<T> f15,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -3909,9 +3909,9 @@ namespace FuncSharp
             {
                 f15(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -4209,9 +4209,9 @@ namespace FuncSharp
             {
                 return f16(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
@@ -4237,7 +4237,7 @@ namespace FuncSharp
             Func<T, bool> e14, Action<T> f14,
             Func<T, bool> e15, Action<T> f15,
             Func<T, bool> e16, Action<T> f16,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -4303,9 +4303,9 @@ namespace FuncSharp
             {
                 f16(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -4615,9 +4615,9 @@ namespace FuncSharp
             {
                 return f17(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
@@ -4644,7 +4644,7 @@ namespace FuncSharp
             Func<T, bool> e15, Action<T> f15,
             Func<T, bool> e16, Action<T> f16,
             Func<T, bool> e17, Action<T> f17,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -4714,9 +4714,9 @@ namespace FuncSharp
             {
                 f17(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -5038,9 +5038,9 @@ namespace FuncSharp
             {
                 return f18(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
@@ -5068,7 +5068,7 @@ namespace FuncSharp
             Func<T, bool> e16, Action<T> f16,
             Func<T, bool> e17, Action<T> f17,
             Func<T, bool> e18, Action<T> f18,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -5142,9 +5142,9 @@ namespace FuncSharp
             {
                 f18(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
@@ -5478,9 +5478,9 @@ namespace FuncSharp
             {
                 return f19(value);
             }
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
@@ -5509,7 +5509,7 @@ namespace FuncSharp
             Func<T, bool> e17, Action<T> f17,
             Func<T, bool> e18, Action<T> f18,
             Func<T, bool> e19, Action<T> f19,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -5587,9 +5587,9 @@ namespace FuncSharp
             {
                 f19(value);
             }
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {

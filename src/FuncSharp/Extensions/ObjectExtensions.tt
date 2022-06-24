@@ -173,9 +173,9 @@ namespace FuncSharp
                 return f<#= j #>(value);
             }
 <#     } #>
-            if (fallback != null)
+            if (otherwise != null)
             {
-                return fallback(value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
@@ -186,7 +186,7 @@ namespace FuncSharp
         public static void Match<T>(
             this T value,
 <#= Lines(i, j => Indent(12) + "Func<T, bool> e" + j + ", Action<T> f" + j, separator: ",") #>,
-            Action<T> fallback = null)
+            Action<T> otherwise = null)
         {
             if (e1(value))
             {
@@ -198,9 +198,9 @@ namespace FuncSharp
                 f<#= j #>(value);
             }
 <#     } #>
-            else if (fallback != null)
+            else if (otherwise != null)
             {
-                fallback(value);
+                otherwise(value);
             }
             else
             {
